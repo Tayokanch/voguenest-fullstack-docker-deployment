@@ -15,50 +15,14 @@ services:
     networks:
       - voguenest_network
 
-  voguenest-api-1:
+  voguenest-api:
     build: ./VogueNest-API
-    image: voguenest-api-1:latest
+    image: voguenest-api:latest
     restart: unless-stopped
     expose:
       - 3000
     environment:
-      MONGO_URL: mongodb://${MONGO_USER}:${MONGO_PASS}@vogunest-mongodb:27017/${MONGO_DB}?authSource=admin
-      JWT_SECRET: ${JWT_SECRET}
-      MONGO_USER: ${MONGO_USER}
-      MONGO_PASS: ${MONGO_PASS}
-      MONGO_DB: ${MONGO_DB}
-      MONGO_PORT: ${MONGO_PORT}
-    depends_on:
-      - voguenest-mongodb
-    networks:
-      - voguenest_network
-
-  voguenest-api-2:
-    build: ./VogueNest-API
-    image: voguenest-api-2:latest
-    restart: unless-stopped
-    expose:
-      - 3000
-    environment:
-      MONGO_URL: mongodb://${MONGO_USER}:${MONGO_PASS}@vogunest-mongodb:27017/${MONGO_DB}?authSource=admin
-      JWT_SECRET: ${JWT_SECRET}
-      MONGO_USER: ${MONGO_USER}
-      MONGO_PASS: ${MONGO_PASS}
-      MONGO_DB: ${MONGO_DB}
-      MONGO_PORT: ${MONGO_PORT}
-    depends_on:
-      - voguenest-mongodb
-    networks:
-      - voguenest_network
-
-  voguenest-api-3:
-    build: ./VogueNest-API
-    image: voguenest-api-3:latest
-    restart: unless-stopped
-    expose:
-      - 3000
-    environment:
-      MONGO_URL: mongodb://${MONGO_USER}:${MONGO_PASS}@vogunest-mongodb:27017/${MONGO_DB}?authSource=admin
+      MONGO_URL: mongodb://${MONGO_USER}:${MONGO_PASS}@voguenest-mongodb:27017/${MONGO_DB}?authSource=admin
       JWT_SECRET: ${JWT_SECRET}
       MONGO_USER: ${MONGO_USER}
       MONGO_PASS: ${MONGO_PASS}
@@ -75,7 +39,7 @@ services:
     container_name: voguenest-frontend
     restart: always
     expose:
-      - "80"
+      - 80
     networks:
       - voguenest_network
 
