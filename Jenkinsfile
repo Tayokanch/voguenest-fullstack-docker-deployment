@@ -2,11 +2,12 @@ pipeline {
     agent any
 
     environment {
-        DB_USER          = credentials('DB_USER')
-        DB_PASSWORD      = credentials('DB_PASSWORD')
-        DB_NAME          = credentials('DB_NAME')
-        DB_HOST          = credentials('DB_HOST')
+        MONGO_USER          = credentials('MONGO_USER')
+        MONGO_PASS      = credentials('MONGO_PASS')
+        MONGO_PORT          = credentials('MONGO_PORT')
         JWT_SECRET       = credentials('JWT_SECRET')
+        STRIPE_SCRETE = credentials('STRIPE_SECRET')
+        MONGO_DB      = credentials('MONGO_DB')
         INIT_ADMIN_EMAIL = credentials('INIT_ADMIN_EMAIL')
     }
 
@@ -19,25 +20,6 @@ pipeline {
         stage('Checkout') {
             steps {
                 checkout scm
-            }
-        }
-
-        stage('Prepare Environment') {
-            steps {
-                sh '''
-                    set -e
-
-                    echo "Creating .env file..."
-
-                    cat > .env <<EOF
-                        DB_USER=$DB_USER
-                        DB_PASSWORD=$DB_PASSWORD
-                        DB_NAME=$DB_NAME
-                        DB_HOST=$DB_HOST
-                        JWT_SECRET=$JWT_SECRET
-                        INIT_ADMIN_EMAIL=$INIT_ADMIN_EMAIL
-                        EOF
-                '''
             }
         }
 
@@ -60,6 +42,7 @@ pipeline {
                     docker compose down --remove-orphans
 
                     echo "Starting new stack..."
+                    docker compose up -d
                 '''
             }
         }
