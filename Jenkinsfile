@@ -2,10 +2,10 @@ pipeline {
     agent any
 
     environment {
-        MONGO_USER          = credentials('MONGO_USER')
+        MONGO_USER      = credentials('MONGO_USER')
         MONGO_PASS      = credentials('MONGO_PASS')
-        MONGO_PORT          = credentials('MONGO_PORT')
-        JWT_SECRET       = credentials('JWT_SECRET')
+        MONGO_PORT      = credentials('MONGO_PORT')
+        JWT_SECRET      = credentials('JWT_SECRET')
         STRIPE_SCRETE = credentials('STRIPE_SECRET')
         MONGO_DB      = credentials('MONGO_DB')
         INIT_ADMIN_EMAIL = credentials('INIT_ADMIN_EMAIL')
