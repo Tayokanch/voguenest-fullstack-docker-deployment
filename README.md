@@ -2,79 +2,213 @@
 
 ![Architecture Diagram](/doc/diagram-export-28-01-2026-13_18_11.png) 
 
-A hands-on **full-stack e-commerce application** deployed on a **bare-metal Kubernetes cluster**, including frontend, backend API, and MongoDB database, with realistic Kubernetes patterns.  
-Includes **Stripe test payment integration**, persistent storage, LoadBalancer exposure with MetalLB, and Ingress routing.
+---
 
-This project demonstrates **real-world DevOps practices**: secure secrets handling, internal networking, scalable deployments, and cluster observability.
+# 🛍️ VogueNest - Full Stack Docker Deployment
+
+A production-inspired full-stack e-commerce application showcasing modern containerized deployment using **Docker**, **Nginx**, **Cloudflare Tunnel**, and **Jenkins CI/CD**.
 
 ---
 
-## 🔹 Project Overview
+## 🚀 Live Demo
 
-**Purpose:** Deploy a production-style full-stack application on Kubernetes while practicing cluster networking, service exposure, persistent storage, and secret management.
-
-**Key Problems Solved:**
-- Securely expose frontend without exposing internal services  
-- Manage sensitive credentials safely with Kubernetes Secrets  
-- Persist database data across pod restarts  
-- Route traffic to multiple services via Ingress  
-- Test production-like Stripe payments in a bare-metal cluster
+🌐 **Application:** https://voguenest.tayolabs.dev/
 
 ---
 
-**Key Points:**
-- Frontend exposed publicly via LoadBalancer + Ingress  
-- API and MongoDB exposed internally only (ClusterIP)  
-- PersistentVolumeClaims ensure MongoDB data durability  
-- Secrets securely store database credentials, JWT secrets, and Stripe keys
+## 📖 Overview
+
+VogueNest is a full-stack e-commerce platform built with modern web technologies and deployed using a production-inspired architecture.
+
+The project demonstrates how to build, containerize, and deploy a scalable full-stack application where:
+
+- The **React frontend** is served by Nginx.
+- The **Node.js API** is load-balanced across three replicas using Nginx.
+- The **MongoDB database** is containerized and only accessible within the Docker network.
+- **Stripe test payment integration**
+- The application is securely exposed to the internet through **Cloudflare Tunnel**.
+- Deployment is automated using a **Jenkins CI/CD pipeline**.
+
+The backend API is **not publicly accessible**. All API communication happens internally within the Docker network through a reverse proxy.
 
 ---
 
-## ⚡ Core Components & Features
+## 🏗️ Architecture
 
-### 1. Deployments
-- Frontend, API, and MongoDB pods managed via **Deployments**  
-- Replica scaling supported  
-- Pod labels used for service selection
-
-### 2. Services
-- **ClusterIP:** MongoDB and internal API access  
-- **LoadBalancer:** Frontend access via MetalLB  
-- NodePort auto-created for LoadBalancer (for external access)
-
-### 3. Secrets & Configuration
-- **Opaque Secrets:** MongoDB credentials, JWT secrets, Stripe keys  
-- **Injected into containers** via `envFrom` or `env.valueFrom.secretKeyRef`  
-- Real secrets **gitignored**; template provided for reproducibility
-
-### 4. Persistent Storage
-- **PersistentVolumeClaim (PVC)** for MongoDB data  
-- Mounted at `/data/db`  
-- Ensures database durability across pod restarts
-
-### 5. Ingress & Routing
-- **NGINX Ingress Controller** installed  
-- Hostname-based routing:
-  - `voguenest.com` → Frontend  
-- External access via MetalLB IP
-
-### 6. Networking
-- Internal DNS: `*.svc.cluster.local` for pod-to-pod communication  
-- Frontend communicates with API using service name:
-```ts
-axios.get('http://voguenest-api-service.default.svc.cluster.local:3100')
+```text
+                           Internet
+                               │
+                               ▼
+                     Cloudflare Tunnel
+                               │
+                               ▼
+                    Central Nginx Reverse Proxy
+                     │                      │
+                     ▼                      ▼
+          React Frontend              API Load Balancer
+            (Nginx)                        (Nginx)
+                                             │
+                   ┌─────────────┬─────────────┬─────────────┐
+                   ▼             ▼             ▼
+              API Replica 1  API Replica 2  API Replica 3
+                       │
+                       ▼
+                    MongoDB
 ```
+
 ---
 
-## 🛠️ Tools & Technologies
+# ⚙️ Technology Stack
 
-- ☸️ **Kubernetes** – cluster orchestration  
-- 🏗️ **MetalLB** – LoadBalancer for bare-metal clusters  
-- 🌀 **NGINX Ingress Controller** – routing and reverse proxy  
-- 🐳 **Docker** – containerization  
-- 🗄️ **MongoDB** – persistent storage  
-- 🟢 **Node.js / Express** – backend API  
-- ⚛️ **React** – frontend  
-- 🔒 **Secrets & PVCs** – secure configuration and persistent storage
+## Frontend
+
+- React
+- TypeScript
+- Vite
+- Axios
+- Context API
+- Custom Hooks
+
+## Backend
+
+- Node.js
+- Express.js
+- TypeScript
+- MongoDB
+- JWT Authentication
+- Stripe Checkout
+
+## Infrastructure
+
+- Docker
+- Docker Compose
+- Nginx
+- Cloudflare Tunnel
+- Jenkins
+
+---
+
+# ✨ Features
+
+### Frontend
+
+- User Registration & Login
+- Product Catalogue
+- Shopping Cart
+- Checkout
+- Protected Routes
+- Responsive Design
+- Third-party Product API Integration
+- Context API State Management
+- Custom Hooks
+
+### Backend
+
+- JWT Authentication
+- Refresh Token Support
+- Stripe Checkout Integration
+- Order Management
+- Protected Routes
+- Health Check Endpoint
+
+---
+
+# 📦 API Endpoints
+
+| Method | Endpoint | Description | Auth |
+|---------|----------|-------------|------|
+| POST | `/signup` | Register a user | ❌ |
+| POST | `/login` | Authenticate user | ❌ |
+| POST | `/sign-out` | Logout user | ❌ |
+| GET | `/users` | Retrieve users | ❌ |
+| GET | `/health` | Health check | ❌ |
+| POST | `/send-orders` | Create an order | ✅ |
+| GET | `/orders` | Retrieve authenticated user's orders | ✅ |
+| GET | `/refreshToken` | Refresh access token | ❌ |
+| POST | `/create-checkout-session` | Create Stripe checkout session | ✅ |
+
+---
+
+# 📂 Project Structure
+
+```text
+.
+├── VogueNest-Frontend/
+├── VogueNest-API/
+├── docker-compose.yml
+├── Jenkinsfile
+└── README.md
+```
+
+### Backend Structure
+
+The API follows a clean layered architecture:
+
+- Controllers
+- Services
+- Middleware
+- Routers
+- Schema
+### Frontend Structure
+
+The frontend is organised into:
+
+- Pages
+- Components
+- Services
+- Context
+- Custom Hooks
+- Utilities
+
+---
+
+# 🐳 Deployment Highlights
+
+- Multi-container Docker Compose deployment
+- React served with Nginx
+- Three replicated API containers
+- Nginx load balancing
+- Private backend API
+- Internal Docker networking
+- Containerized MongoDB
+- Secure public access via Cloudflare Tunnel
+- Automated deployment using Jenkins
+
+---
+
+# 🔒 Security
+
+- Backend API is **not publicly exposed**
+- MongoDB is only accessible inside the Docker network
+- Authentication using JWT
+- Secure reverse proxy with Nginx
+- Public traffic routed through Cloudflare Tunnel
+
+---
 
 
+# 🎯 Learning Objectives
+
+This project demonstrates practical experience with:
+
+- React + TypeScript
+- Node.js + Express
+- MongoDB
+- Docker
+- Docker Compose
+- Nginx Reverse Proxy
+- Nginx Load Balancing
+- Cloudflare Tunnel
+- Jenkins CI/CD
+- Container Networking
+- Production-inspired Deployment
+
+---
+
+
+# 👨‍💻 Author
+
+
+Cloud • DevOps • Backend Engineering • Infrastructure Automation
+
+If you found this project interesting, feel free to ⭐ the repository.
