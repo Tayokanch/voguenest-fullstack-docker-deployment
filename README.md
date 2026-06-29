@@ -12,7 +12,7 @@ A production-inspired full-stack e-commerce application showcasing modern contai
 
 ## 🚀 Live Demo
 
-🌐 **Application:** https://voguenest.tayolabs.dev/
+🌐 **Application:** https://voguenest.tayolabs.dev
 
 ---
 
@@ -203,12 +203,3 @@ This project demonstrates practical experience with:
 - Container Networking
 - Production-inspired Deployment
 
----
-
-
-# 👨‍💻 Author
-
-
-Cloud • DevOps • Backend Engineering • Infrastructure Automation
-
-If you found this project interesting, feel free to ⭐ the repository.
