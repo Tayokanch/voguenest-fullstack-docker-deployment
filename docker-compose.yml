@@ -21,8 +21,6 @@ services:
     restart: unless-stopped
     expose:
       - 3000
-    ports: 
-      - 3000:3003
     environment:
       MONGO_URL: mongodb://${MONGO_USER}:${MONGO_PASS}@voguenest-mongodb:27017/${MONGO_DB}?authSource=admin
       JWT_SECRET: ${JWT_SECRET}
