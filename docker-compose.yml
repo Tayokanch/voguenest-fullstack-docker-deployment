@@ -27,13 +27,13 @@ services:
       MONGO_USER: ${MONGO_USER}
       MONGO_PASS: ${MONGO_PASS}
       MONGO_DB: ${MONGO_DB}
-      MONGO_PORT: ${MONGO_PORT:}
+      MONGO_PORT: ${MONGO_PORT}
     depends_on:
       - vogunest-mongodb
     networks:
       - voguenest_network
 
-  voguenest-api2:
+  vogunest-api2:
     build: ./VogueNest-API
     image: voguenest-api:latest
     restart: unless-stopped
@@ -45,12 +45,13 @@ services:
       MONGO_USER: ${MONGO_USER}
       MONGO_PASS: ${MONGO_PASS}
       MONGO_DB: ${MONGO_DB}
-      MONGO_PORT: ${MONGO_PORT:}
+      MONGO_PORT: ${MONGO_PORT}
     depends_on:
       - vogunest-mongodb
     networks:
       - voguenest_network
-  voguenest-api3:
+
+  vogunest-api3:
     build: ./VogueNest-API
     image: voguenest-api:latest
     restart: unless-stopped
@@ -62,7 +63,7 @@ services:
       MONGO_USER: ${MONGO_USER}
       MONGO_PASS: ${MONGO_PASS}
       MONGO_DB: ${MONGO_DB}
-      MONGO_PORT: ${MONGO_PORT:}
+      MONGO_PORT: ${MONGO_PORT}
     depends_on:
       - vogunest-mongodb
     networks:
