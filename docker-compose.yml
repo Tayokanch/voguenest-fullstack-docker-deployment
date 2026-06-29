@@ -1,7 +1,7 @@
 version: "3.9"
 
 services:
-  vogunest-mongodb:
+  voguenest-mongodb:
     image: mongo:7
     container_name: voguenest-mongo
     restart: unless-stopped
@@ -15,9 +15,9 @@ services:
     networks:
       - voguenest_network
 
-  voguenest-api1:
+  voguenest-api-1:
     build: ./VogueNest-API
-    image: voguenest-api1:latest
+    image: voguenest-api-1:latest
     restart: unless-stopped
     expose:
       - 3000
@@ -29,13 +29,13 @@ services:
       MONGO_DB: ${MONGO_DB}
       MONGO_PORT: ${MONGO_PORT}
     depends_on:
-      - vogunest-mongodb
+      - voguenest-mongodb
     networks:
       - voguenest_network
 
-  vogunest-api2:
+  voguenest-api-2:
     build: ./VogueNest-API
-    image: voguenest-api2:latest
+    image: voguenest-api-2:latest
     restart: unless-stopped
     expose:
       - 3000
@@ -47,13 +47,13 @@ services:
       MONGO_DB: ${MONGO_DB}
       MONGO_PORT: ${MONGO_PORT}
     depends_on:
-      - vogunest-mongodb
+      - voguenest-mongodb
     networks:
       - voguenest_network
 
-  vogunest-api3:
+  voguenest-api-3:
     build: ./VogueNest-API
-    image: voguenest-api3:latest
+    image: voguenest-api-3:latest
     restart: unless-stopped
     expose:
       - 3000
@@ -65,7 +65,7 @@ services:
       MONGO_DB: ${MONGO_DB}
       MONGO_PORT: ${MONGO_PORT}
     depends_on:
-      - vogunest-mongodb
+      - voguenest-mongodb
     networks:
       - voguenest_network
 
