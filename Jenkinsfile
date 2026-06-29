@@ -9,6 +9,7 @@ pipeline {
         STRIPE_SCRETE = credentials('STRIPE_SECRET')
         MONGO_DB      = credentials('MONGO_DB')
         INIT_ADMIN_EMAIL = credentials('INIT_ADMIN_EMAIL')
+        MONGO_URL = credentials('MONGO_URL')
     }
 
     options {
