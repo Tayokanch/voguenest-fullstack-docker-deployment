@@ -42,7 +42,7 @@ pipeline {
                     docker compose down --remove-orphans
 
                     echo "Starting new stack..."
-                    
+
                     docker compose up -d --scale voguenest-api=3
 
                 '''
@@ -65,7 +65,7 @@ pipeline {
                     sleep 10
 
                     echo "Checking API health..."
-                    curl -f http://localhost/api/health || exit 1
+                    curl -f http://localhost:3000/api/health || exit 1
                 '''
             }
         }
