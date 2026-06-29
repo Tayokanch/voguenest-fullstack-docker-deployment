@@ -17,7 +17,7 @@ services:
 
   voguenest-api1:
     build: ./VogueNest-API
-    image: voguenest-api:latest
+    image: voguenest-api1:latest
     restart: unless-stopped
     expose:
       - 3000
@@ -35,7 +35,7 @@ services:
 
   vogunest-api2:
     build: ./VogueNest-API
-    image: voguenest-api:latest
+    image: voguenest-api2:latest
     restart: unless-stopped
     expose:
       - 3000
@@ -53,7 +53,7 @@ services:
 
   vogunest-api3:
     build: ./VogueNest-API
-    image: voguenest-api:latest
+    image: voguenest-api3:latest
     restart: unless-stopped
     expose:
       - 3000
