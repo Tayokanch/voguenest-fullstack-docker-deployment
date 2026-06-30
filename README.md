@@ -1,11 +1,8 @@
-# Voguenest Full-Stack Kubernetes Project
-
-![Architecture Diagram](/doc/diagram-export-28-01-2026-13_18_11.png) 
-
----
-
 # 🛍️ VogueNest - Full Stack Docker Deployment
 
+![Architecture Diagram](/doc/vogunest.gif) 
+
+---
 A production-inspired full-stack e-commerce application showcasing modern containerized deployment using **Docker**, **Nginx**, **Cloudflare Tunnel**, and **Jenkins CI/CD**.
 
 ---
