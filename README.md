@@ -30,31 +30,6 @@ The backend API is **not publicly accessible**. All API communication happens in
 
 ---
 
-## 🏗️ Architecture
-
-```text
-                           Internet
-                               │
-                               ▼
-                     Cloudflare Tunnel
-                               │
-                               ▼
-                    Central Nginx Reverse Proxy
-                     │                      │
-                     ▼                      ▼
-          React Frontend              API Load Balancer
-            (Nginx)                        (Nginx)
-                                             │
-                   ┌─────────────┬─────────────┬─────────────┐
-                   ▼             ▼             ▼
-              API Replica 1  API Replica 2  API Replica 3
-                       │
-                       ▼
-                    MongoDB
-```
-
----
-
 # ⚙️ Technology Stack
 
 ## Frontend
